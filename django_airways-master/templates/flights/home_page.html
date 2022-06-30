@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Best Flights In Django
+{% endblock title %}
+
+{% block content %}
+	
+	<!-- MAIN PAGE -->
+	<main class="container mt-4">
+
+		<h3 class="text-center mb-5">Latest Flights</h3>
+
+		<!--Panel-->
+		<div class="row">
+			{% for flight in flight_list %}
+
+			<div class="col-md-4">
+				{% if flight.has_departed %}
+		        	<a href="{% url 'contact_form' %}" class="red-text">
+				{% else %}
+					<a href="{{ flight.get_absolute_url }}" class="green-text">
+		    	{% endif %}
+					<div class="card border-success mb-5" style="max-width: 18rem;">
+					    <div class="card-header">₹ {{ flight.price }}</div>
+					    <div class="card-body text-success">
+					        	<h5 class="card-title">{{ flight.origin }} to {{ flight.destination }}</h5>
+					        <p class="card-text">Flight Duration: {{ flight.duration }}</p>
+					    </div>
+					</div>
+				</a>
+				</div>
+
+			{% endfor %}
+		</div>
+		<!--/.Panel-->
+
+	</main>
+	<!-- /MAIN PAGE -->
+
+{% endblock content %}
